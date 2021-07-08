@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Dimensions } from 'react-native';
 
 export const InputWrapper = styled.View`
     flex: 1;
@@ -8,13 +9,22 @@ export const InputWrapper = styled.View`
     background-color: #2e64e515;
 `;
 
+const width = Dimensions.get('window').width - 50;
 export const InputField = styled.TextInput`
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    text-align: center;
+    border: 1px;
+    height: 50px;
     width:90%;
-    margin-bottom: 15px;
+    borderRadius:5px;
+    paddingLeft:15px;
+    marginBottom:10px;
+    fontSize:20px;
+`;
+
+export const InputTitle = styled.Text`
+    width:90%;
+    height: 50px;
+    marginTop:5px;
+    fontSize:20px;
 `;
 
 export const AddImage = styled.Image`

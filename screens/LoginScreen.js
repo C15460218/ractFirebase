@@ -22,15 +22,15 @@ const LoginScreen = ({navigation}) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image
-        source={require('../assets/rn-social-logo.png')}
+        source={require('../assets/sus-logo.png')}
         style={styles.logo}
       />
-      <Text style={styles.text}>RN Social App</Text>
+      <Text style={styles.text}>Sus-Manager App</Text>
 
       <FormInput
         labelValue={email}
         onChangeText={(userEmail) => setEmail(userEmail)}
-        placeholderText="Email"
+        placeholderText="Correo"
         iconType="user"
         keyboardType="email-address"
         autoCapitalize="none"
@@ -40,7 +40,7 @@ const LoginScreen = ({navigation}) => {
       <FormInput
         labelValue={password}
         onChangeText={(userPassword) => setPassword(userPassword)}
-        placeholderText="Password"
+        placeholderText="Contraseña"
         iconType="lock"
         secureTextEntry={true}
       />
@@ -51,13 +51,13 @@ const LoginScreen = ({navigation}) => {
       />
 
       <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
-        <Text style={styles.navButtonText}>Forgot Password?</Text>
+        <Text style={styles.navButtonText}>¿Olvidaste contraseña?</Text>
       </TouchableOpacity>
 
       {Platform.OS === 'android' ? (
         <View>
           <SocialButton
-            buttonTitle="Sign In with Facebook"
+            buttonTitle="Inicia sesión con Facebook"
             btnType="facebook"
             color="#4867aa"
             backgroundColor="#e6eaf4"
@@ -65,7 +65,7 @@ const LoginScreen = ({navigation}) => {
           />
 
           <SocialButton
-            buttonTitle="Sign In with Google"
+            buttonTitle="Inicia sesión con Google"
             btnType="google"
             color="#de4d41"
             backgroundColor="#f5e7ea"
@@ -78,7 +78,7 @@ const LoginScreen = ({navigation}) => {
         style={styles.forgotButton}
         onPress={() => navigation.navigate('Signup')}>
         <Text style={styles.navButtonText}>
-          Don't have an acount? Create here
+          ¿No tienes cuenta? Crea una!
         </Text>
       </TouchableOpacity>
     </ScrollView>
@@ -89,11 +89,10 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f9fafd',
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    paddingTop: 50
   },
   logo: {
     height: 150,

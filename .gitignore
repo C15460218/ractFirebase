@@ -62,3 +62,6 @@ buck-out/
 /android/app/google-services.json
 GoogleService-Info.plist
 .env
+
+android/
+java_pid19768.hprof

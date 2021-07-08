@@ -11,7 +11,7 @@ export const Card = styled.View`
     background-color: #f8f8f8;
     width: 100%;
     margin-bottom: 20px;
-    border-radius: 10px;
+    border-radius: 15px;
 `;
 
 export const UserInfo = styled.View`
@@ -49,12 +49,13 @@ export const PostText = styled.Text`
     font-family: 'Lato-Regular';
     padding-left: 15px;
     padding-right: 15px;
+    margin-bottom: 15px;
 `;
 
 export const PostImg = styled.Image`
     width: 100%;
     height: 250px;
-    margin-top: 15px;
+    /* margin-top: 15px; */
 `;
 
 export const Divider = styled.View`
@@ -72,7 +73,7 @@ export const InteractionWrapper = styled.View`
 `;
 
 export const Interaction = styled.TouchableOpacity`
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     border-radius: 5px;
     padding: 2px 5px;

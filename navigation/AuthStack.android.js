@@ -27,7 +27,7 @@ const AuthStack = () => {
     }); // Add some error handling, also you can simply do setIsFirstLaunch(null)
   
     GoogleSignin.configure({
-      webClientId: 'YOUR_APP_WEB_CLIENT_ID',
+      webClientId: '317256014191-kf9lr435jaucvrnn6eqqr0f28nmnpd30.apps.googleusercontent.com',
     });
   
   }, []);

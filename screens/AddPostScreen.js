@@ -21,9 +21,11 @@ import {
   SubmitBtn,
   SubmitBtnText,
   StatusWrapper,
+  InputTitle,
 } from '../styles/AddPost';
 
 import { AuthContext } from '../navigation/AuthProvider';
+import HomeScreen from './HomeScreen';
 
 const AddPostScreen = () => {
   const {user, logout} = useContext(AuthContext);
@@ -32,6 +34,10 @@ const AddPostScreen = () => {
   const [uploading, setUploading] = useState(false);
   const [transferred, setTransferred] = useState(0);
   const [post, setPost] = useState(null);
+  const [sus,setSus] = useState(null);
+  const [price,setPrice] = useState(null);
+  const [desc,setDesc] = useState(null);
+  const [day,setDay] = useState(null);
 
   const takePhotoFromCamera = () => {
     ImagePicker.openCamera({
@@ -56,6 +62,32 @@ const AddPostScreen = () => {
       setImage(imageUri);
     });
   };
+
+  const submitSusc = async ({navigate}) => {
+
+    firestore()
+    .collection('suscripcion')
+    .add({
+      userId: user.uid,
+      name: sus,
+      price,
+      desc,
+      day,
+      postTime: firestore.Timestamp.fromDate(new Date()),
+    })
+    .then(() => {
+      console.log('Suscripción Agregada!');
+      Alert.alert(
+        'Suscripción Agregada!',
+        'Tu suscripción ha sido agregada correctamente!',
+      );
+      setSus(null);
+    })
+    .catch((error) => {
+      console.log('Something went wrong with added post to firestore.', error);
+    });
+    navigate.navigate(HomeScreen);
+  }
 
   const submitPost = async () => {
     const imageUrl = await uploadImage();
@@ -138,15 +170,39 @@ const AddPostScreen = () => {
 
   return (
     <View style={styles.container}>
+
       <InputWrapper>
         {image != null ? <AddImage source={{uri: image}} /> : null}
-
+        <InputTitle>Nombre de Suscripción</InputTitle>
         <InputField
-          placeholder="What's on your mind?"
+          placeholder="Nombre de la suscripcion"
           multiline
           numberOfLines={4}
-          value={post}
-          onChangeText={(content) => setPost(content)}
+          value={sus}
+          onChangeText={(content) => setSus(content)}
+        />
+        <InputTitle>Monto</InputTitle>
+        <InputField
+          placeholder="Monto a Pagar"
+          multiline
+          numberOfLines={4}
+          value={price}
+          onChangeText={(content) => setPrice(content)}
+        />
+        <InputTitle>Dia de Pago</InputTitle>
+        <InputField
+          placeholder="¿Cada cuando se Paga?"
+          multiline
+          numberOfLines={4}
+          value={day}
+          onChangeText={(content) => setDay(content)}
+        />
+        <InputTitle>Descripción</InputTitle>
+        <InputField
+          multiline
+          numberOfLines={4}
+          value={desc}
+          onChangeText={(content) => setDesc(content)}
         />
         {uploading ? (
           <StatusWrapper>
@@ -154,25 +210,11 @@ const AddPostScreen = () => {
             <ActivityIndicator size="large" color="#0000ff" />
           </StatusWrapper>
         ) : (
-          <SubmitBtn onPress={submitPost}>
-            <SubmitBtnText>Post</SubmitBtnText>
+          <SubmitBtn onPress={submitSusc}>
+            <SubmitBtnText>Aceptar</SubmitBtnText>
           </SubmitBtn>
         )}
       </InputWrapper>
-      <ActionButton buttonColor="#2e64e5">
-        <ActionButton.Item
-          buttonColor="#9b59b6"
-          title="Take Photo"
-          onPress={takePhotoFromCamera}>
-          <Icon name="camera-outline" style={styles.actionButtonIcon} />
-        </ActionButton.Item>
-        <ActionButton.Item
-          buttonColor="#3498db"
-          title="Choose Photo"
-          onPress={choosePhotoFromLibrary}>
-          <Icon name="md-images-outline" style={styles.actionButtonIcon} />
-        </ActionButton.Item>
-      </ActionButton>
     </View>
   );
 };
